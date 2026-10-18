@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>TikTok Video Downloader - No Watermark</title>
+<style>
+body{font-family:Arial;text-align:center;padding:50px;background:#f5f5f5}
+.box{background:#fff;padding:30px;border-radius:15px;max-width:500px;margin:auto;box-shadow:0 0 10px #ccc}
+input{width:90%;padding:12px;border-radius:8px;border:1px solid #ccc}
+button{padding:12px 25px;background:#000;color:#fff;border:none;border-radius:8px;margin-top:15px;cursor:pointer}
+</style>
+</head>
+<body>
+<div class="box">
+<h2>TikTok Video Downloader</h2>
+<p>Link paste karo aur download karo</p>
+<input type="text" id="url" placeholder="Paste TikTok link here...">
+<br>
+<button onclick="download()">Download Video</button>
+<p id="result"></p>
+</div>
+<script>
+async function download(){
+let link=document.getElementById('url').value;
+document.getElementById('result').innerHTML="Loading...";
+let res=await fetch(`https://www.tikwm.com/api/?url=${link}`);
+let data=await res.json();
+if(data.data){
+document.getElementById('result').innerHTML=`<a href="${data.data.play}" target="_blank"><button>Save Video Without Watermark</button></a>`;
+}else{
+document.getElementById('result').innerHTML="Invalid link, dobara try karo";
+}
+}
+</script>
+</body>
+</html>
